@@ -14,9 +14,11 @@
 
 
 <ion-content padding>
-  <ion-fab top right edge>
-    <button ion-fab (click)="goToNewProduct()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+  <ion-fab right top edge>
+      <button ion-fab (click)="goToNewProduct()">
+          <ion-icon name="md-add-circle"></ion-icon>
+        </button>
+    </ion-fab>
   <ion-list>
     <ion-item *ngFor="let item of products">
       <ion-thumbnail item-start>
