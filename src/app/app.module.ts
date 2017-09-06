@@ -15,10 +15,12 @@ import { CreatePlantPage } from "../pages/plants/create-plant/create-plant";
 import { ScanBarcodePage } from "../pages/scan-barcode/scan-barcode";
 import { ProductsPage } from "../pages/products/products";
 import { CreateProductPage } from "../pages/products/create-product/create-product";
+import { TutorialPage } from "../pages/tutorial/tutorial";
 
 @NgModule({
   declarations: [
     MyApp,
+    TutorialPage,
     AboutPage,
     ContactPage,
     HomePage,
@@ -36,6 +38,7 @@ import { CreateProductPage } from "../pages/products/create-product/create-produ
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TutorialPage,
     AboutPage,
     ContactPage,
     HomePage,

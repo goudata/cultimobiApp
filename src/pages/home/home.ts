@@ -4,6 +4,7 @@ import { PlantsPage } from "../plants/plants";
 import { CreatePlantPage } from "../plants/create-plant/create-plant";
 import { ScanBarcodePage } from "../scan-barcode/scan-barcode";
 import { ProductsPage } from "../products/products";
+import { TutorialPage } from "../tutorial/tutorial";
 
 @Component({
   selector: 'page-home',
@@ -30,5 +31,9 @@ export class HomePage {
   goToProducts() {
     this.navCtrl.push(ProductsPage)
   }
+
+  // ionViewAfterLoad() {
+  //   this.navCtrl.setRoot(TutorialPage)
+  // }
 
 }
