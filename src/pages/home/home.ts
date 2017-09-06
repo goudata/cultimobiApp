@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PlantsPage } from "../plants/plants";
 import { CreatePlantPage } from "../plants/create-plant/create-plant";
+import { ScanBarcodePage } from "../scan-barcode/scan-barcode";
+import { ProductsPage } from "../products/products";
 
 @Component({
   selector: 'page-home',
@@ -19,6 +21,14 @@ export class HomePage {
 
   goToNewPlant() {
     this.navCtrl.push(CreatePlantPage)
+  }
+
+  goToScanPlant() {
+    this.navCtrl.push(ScanBarcodePage)
+  }
+
+  goToProducts() {
+    this.navCtrl.push(ProductsPage)
   }
 
 }

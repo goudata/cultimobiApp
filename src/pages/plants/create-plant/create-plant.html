@@ -6,13 +6,39 @@
 -->
 <ion-header>
 
-  <ion-navbar color="danger">
+  <ion-navbar color="primary">
     <ion-title>Add New Plant</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="create-background">
+  <ion-card>
 
+    <img src="../assets/images/new-image.png">
+    <ion-fab right top>
+      <button ion-fab>
+          <ion-icon name="md-add-circle"></ion-icon>
+        </button>
+    </ion-fab>
+
+  </ion-card>
+  <ion-list padding>
+
+    <ion-item>
+      <ion-label>Order Date</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Plant Origin</ion-label>
+      <ion-select [(ngModel)]="plantOrigin">
+        <ion-option value="Seed">Seed</ion-option>
+        <ion-option value="Clone">Clone</ion-option>
+        <ion-option value="Tissue">Tissue</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

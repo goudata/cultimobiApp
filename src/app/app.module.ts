@@ -12,6 +12,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PlantsPage } from "../pages/plants/plants";
 import { CreatePlantPage } from "../pages/plants/create-plant/create-plant";
+import { ScanBarcodePage } from "../pages/scan-barcode/scan-barcode";
+import { ProductsPage } from "../pages/products/products";
+import { CreateProductPage } from "../pages/products/create-product/create-product";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { CreatePlantPage } from "../pages/plants/create-plant/create-plant";
     HomePage,
     TabsPage,
     PlantsPage,
-    CreatePlantPage
+    CreatePlantPage,
+    ScanBarcodePage,
+    ProductsPage,
+    CreateProductPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,10 @@ import { CreatePlantPage } from "../pages/plants/create-plant/create-plant";
     HomePage,
     TabsPage,
     PlantsPage,
-    CreatePlantPage
+    CreatePlantPage,
+    ScanBarcodePage,
+    ProductsPage,
+    CreateProductPage
   ],
   providers: [
     StatusBar,

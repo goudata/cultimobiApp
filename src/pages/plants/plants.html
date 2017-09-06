@@ -5,11 +5,12 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar color="danger">
+  <ion-navbar color="leaf">
     <ion-title>View All Plants</ion-title>
   </ion-navbar>
+</ion-header>
 
+<ion-content class="plant-background">
   <ion-toolbar no-border-top>
     <ion-list>
       <ion-list-header>Select Stage</ion-list-header>
@@ -29,10 +30,7 @@
       </ion-item>
     </ion-list>
   </ion-toolbar>
-</ion-header>
 
-
-<ion-content>
   <ion-list>
     <ion-item *ngFor="let item of getItems(stageType)">
       <ion-thumbnail item-start>

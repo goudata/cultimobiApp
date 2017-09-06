@@ -4,62 +4,116 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="home-background" color="secondary" padding>
+<ion-content class="home-background" color="secondary">
 
-  <ion-card>
-    <ion-card-header>
-      View All Plants
-    </ion-card-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card color="leaf">
+          <ion-card-header>
+            View All Plants
+          </ion-card-header>
+          <ion-card-content (click)="goToPlants()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/011-leaf.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card color="primary">
+          <ion-card-header>
+            Add New Plant
+          </ion-card-header>
 
-    <ion-card-content (click)="goToPlants()">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-10>
-            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
-          </ion-col>
-          <ion-col>
-            <div><img src="../assets/images/011-leaf.png" /></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-content (click)="goToNewPlant()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/sprout.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card color="warning">
+          <ion-card-header>
+            Scan a Barcode
+          </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      Scan a Barcode
-    </ion-card-header>
+          <ion-card-content (click)="goToScanPlant()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/001-shopping.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
 
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-10>
-            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
-          </ion-col>
-          <ion-col>
-            <div><img src="../assets/images/001-shopping.png" /></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card color="purple">
+          <ion-card-header>
+            View All Products
+          </ion-card-header>
 
-  <ion-card>
-    <ion-card-header>
-      Add New Plant
-    </ion-card-header>
+          <ion-card-content (click)="goToProducts()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/002-weed.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            Reports
+          </ion-card-header>
 
-    <ion-card-content (click)="goToNewPlant()">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-10>
-            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
-          </ion-col>
-          <ion-col>
-            <div><img src="../assets/images/004-sprout.png" /></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+          <ion-card-content (click)="goToScanPlant()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/009-diagram.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card color="darkgrey">
+          <ion-card-header>
+            Manage Location
+          </ion-card-header>
+
+          <ion-card-content (click)="goToScanPlant()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div><img src="../assets/images/008-store.png" /></div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
