@@ -1,17 +1,65 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content class="home-background" color="secondary" padding>
+
+  <ion-card>
+    <ion-card-header>
+      View All Plants
+    </ion-card-header>
+
+    <ion-card-content (click)="goToPlants()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
+          </ion-col>
+          <ion-col>
+            <div><img src="../assets/images/011-leaf.png" /></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Scan a Barcode
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
+          </ion-col>
+          <ion-col>
+            <div><img src="../assets/images/001-shopping.png" /></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Add New Plant
+    </ion-card-header>
+
+    <ion-card-content (click)="goToNewPlant()">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <div>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</div>
+          </ion-col>
+          <ion-col>
+            <div><img src="../assets/images/004-sprout.png" /></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
