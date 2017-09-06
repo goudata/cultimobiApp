@@ -33,17 +33,15 @@
 
 
 <ion-content>
-  <ion-card *ngIf="stageType">
-    <ion-list-header color="secondary">{{ stageType }}</ion-list-header>
-    <ion-item no-lines class="bottom-border" *ngFor="let item of getItems(stageType)">
-      <ion-avatar item-start>
+  <ion-list>
+    <ion-item *ngFor="let item of getItems(stageType)">
+      <ion-thumbnail item-start>
         <img src="../assets/images/011-leaf.png">
-      </ion-avatar>
-      <ion-list (click)="showDetail(item.plantId)">
-        <h4>{{item.itemName}}</h4>
-        <h3>ID: {{item.plantId}} - Batch #: {{item.batchNo}}</h3>
-        <p>Created: {{item.createdDate}}</p>
-      </ion-list>
+      </ion-thumbnail>
+      <h4>{{item.itemName}}</h4>
+      <h3>ID: {{item.plantId}} - Batch #: {{item.batchNo}}</h3>
+      <p>Created: {{item.createdDate}}</p>
+      <button ion-button clear item-end (click)="showDetail(item.plantId)">View</button>
     </ion-item>
-  </ion-card>
+  </ion-list>
 </ion-content>
