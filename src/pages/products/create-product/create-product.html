@@ -13,6 +13,65 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="create-background">
+  <ion-card>
 
+    <img src="assets/images/new-image.png">
+    <ion-fab right top>
+      <button ion-fab>
+          <ion-icon name="md-add-circle"></ion-icon>
+        </button>
+    </ion-fab>
+
+  </ion-card>
+  <ion-list padding>
+
+    <ion-item>
+      <ion-label floating>Product Name</ion-label>
+      <ion-input [(ngModel)]="product.productName" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Product Description</ion-label>
+      <ion-textarea [(ngModel)]="product.productDesc"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select [(ngModel)]="product.productType">
+        <ion-option value="Cannabis">Cannabis</ion-option>
+        <ion-option value="Concentrate">Concentrate</ion-option>
+        <ion-option value="Topical">Topical</ion-option>
+        <ion-option value="SolidMip">SolidMip</ion-option>
+        <ion-option value="LiquidMip">LiquidMip</ion-option>
+        <ion-option value="Plant">Topical</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select [(ngModel)]="product.productCategory">
+        <ion-option *ngFor="let item of getCategory(product.productType)" value="{{item.Category}}">{{item.Category}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Group</ion-label>
+      <ion-select [(ngModel)]="product.productGroup">
+        <ion-option *ngFor="let item of getGroup(product.productCategory)" value="{{item.Group}}">{{item.Group}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>UOM</ion-label>
+      <ion-select [(ngModel)]="product.productUOM">
+        <ion-option value="Gram">Gram</ion-option>
+        <ion-option value="Ounce">Ounce</ion-option>
+        <ion-option value="Each">Each</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button full>Add Product</button>
+
+  </ion-list>
 </ion-content>

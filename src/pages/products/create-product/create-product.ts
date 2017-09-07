@@ -15,6 +15,55 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CreateProductPage {
 
+  public date: string = new Date().toISOString();
+
+  public event = {
+    month: this.date
+  }
+
+  product: any = {
+    productName: '',
+    productDesc: '',
+    productUOM: '',
+    productType: '',
+    productCategory: '',
+    productGroup: ''
+  }
+
+  types: any = {
+    'Cannabis': [
+      {
+        Category: 'Flower'
+      },
+      {
+        Category: 'Trim'
+      },
+    ]
+  }
+
+  categories: any = {
+    'Flower': [
+      {
+        Group: 'Indica',
+      },
+      {
+        Group: 'Sativa',
+      },
+      {
+        Group: 'Hyberd',
+      }
+
+    ]
+  }
+
+  getCategory(category: any) {
+    return this.types[category];
+  }
+
+  getGroup(group: any) {
+    return this.categories[group];
+  }
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
