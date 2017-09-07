@@ -16,6 +16,7 @@ import { ScanBarcodePage } from "../pages/scan-barcode/scan-barcode";
 import { ProductsPage } from "../pages/products/products";
 import { CreateProductPage } from "../pages/products/create-product/create-product";
 import { TutorialPage } from "../pages/tutorial/tutorial";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TutorialPage } from "../pages/tutorial/tutorial";
   providers: [
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
