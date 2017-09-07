@@ -16,13 +16,13 @@
 <ion-content class="create-background">
   <ion-card>
 
-    <img src="{{currentImage}}">
+    <img (click)="takePhoto()" src="{{currentImage}}">
     
-    <ion-fab right top>
+    <!-- <ion-fab right top>
       <button ion-fab (click)="takePhoto()">
           <ion-icon name="md-add-circle"></ion-icon>
         </button>
-    </ion-fab>
+    </ion-fab> -->
 
   </ion-card>
   <ion-list padding>
