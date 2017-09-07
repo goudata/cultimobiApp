@@ -17,6 +17,7 @@ import { ProductsPage } from "../pages/products/products";
 import { CreateProductPage } from "../pages/products/create-product/create-product";
 import { TutorialPage } from "../pages/tutorial/tutorial";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { Camera } from "@ionic-native/camera";
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -16,9 +16,10 @@
 <ion-content class="create-background">
   <ion-card>
 
-    <img src="assets/images/new-image.png">
+    <img src="{{currentImage}}">
+    
     <ion-fab right top>
-      <button ion-fab>
+      <button ion-fab (click)="takePhoto()">
           <ion-icon name="md-add-circle"></ion-icon>
         </button>
     </ion-fab>
@@ -39,6 +40,6 @@
         <ion-option value="Tissue">Tissue</ion-option>
       </ion-select>
     </ion-item>
-
+    
   </ion-list>
 </ion-content>
