@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, IonicPage } from 'ionic-angular';
 import { PlantsPage } from "../plants/plants";
 import { CreatePlantPage } from "../plants/create-plant/create-plant";
 import { ScanBarcodePage } from "../scan-barcode/scan-barcode";
@@ -10,6 +10,7 @@ import { LoginPage } from "../login/login";
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 import { Profile } from "../../models/profile";
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -39,16 +40,16 @@ export class HomePage {
     this.navCtrl.push(ProductsPage)
   }
 
-  async ionViewWillLoad() {
-    await this.afAuth.authState.subscribe(data => {
-      if(data && data.email && data.uid){
-      this.toast.create({
-        message: `Welcome back, ${data.email}`,
-        duration: 3000  
-      }).present();
-    } else {
-      this.navCtrl.setRoot(LoginPage);
-    }
+  ionViewWillLoad() {
+    this.afAuth.authState.subscribe(data => {
+      if (data && data.email && data.uid) {
+        this.toast.create({
+          message: `Welcome back, ${data.email}`,
+          duration: 3000
+        }).present();
+      } else {
+        this.navCtrl.setRoot(LoginPage);
+      }
 
       // this.profileData = this.afDatabase.object(`profile/${data.uid}`);
 
