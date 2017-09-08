@@ -18,6 +18,13 @@ import { CreateProductPage } from "../pages/products/create-product/create-produ
 import { TutorialPage } from "../pages/tutorial/tutorial";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera } from "@ionic-native/camera";
+import { AngularFireModule } from "angularfire2";
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { FIREBASE_CONFIG } from "./app.firebase.config";
+import { RegisterPage } from "../pages/register/register";
+import { LoginPage } from "../pages/login/login";
+import { ProfilePage } from "../pages/profile/profile";
+import { AngularFireDatabaseModule } from "angularfire2/database";
 
 @NgModule({
   declarations: [
@@ -31,11 +38,17 @@ import { Camera } from "@ionic-native/camera";
     CreatePlantPage,
     ScanBarcodePage,
     ProductsPage,
-    CreateProductPage
+    CreateProductPage,
+    LoginPage,
+    RegisterPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +62,10 @@ import { Camera } from "@ionic-native/camera";
     CreatePlantPage,
     ScanBarcodePage,
     ProductsPage,
-    CreateProductPage
+    CreateProductPage,
+    LoginPage,
+    RegisterPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
