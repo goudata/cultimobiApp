@@ -23,14 +23,6 @@ export class HomePage {
   }
 
 
-  ngOnInit() {
-    this.afAuth.authState.subscribe(auth => {
-      if(!auth){
-        this.navCtrl.setRoot(LoginPage);
-      }
-    })
-  }
-
   goToPlants() {
     this.navCtrl.push(PlantsPage)
   }
@@ -47,16 +39,20 @@ export class HomePage {
     this.navCtrl.push(ProductsPage)
   }
 
-  // async ionViewWillLoad() {
-  //   await this.afAuth.authState.subscribe(data => {
-  //     // this.toast.create({
-  //     //   message: `Welcome back, ${data.email}`,
-  //     //   duration: 3000  
-  //     // }).present();
+  async ionViewWillLoad() {
+    await this.afAuth.authState.subscribe(data => {
+      if(data && data.email && data.uid){
+      this.toast.create({
+        message: `Welcome back, ${data.email}`,
+        duration: 3000  
+      }).present();
+    } else {
+      this.navCtrl.setRoot(LoginPage);
+    }
 
-  //     this.profileData = this.afDatabase.object(`profile/${data.uid}`);
+      // this.profileData = this.afDatabase.object(`profile/${data.uid}`);
 
-  //   })
-  // }
+    })
+  }
 
 }
