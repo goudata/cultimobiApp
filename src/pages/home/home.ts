@@ -47,16 +47,16 @@ export class HomePage {
     this.navCtrl.push(ProductsPage)
   }
 
-  async ionViewWillLoad() {
-    await this.afAuth.authState.subscribe(data => {
-      // this.toast.create({
-      //   message: `Welcome back, ${data.email}`,
-      //   duration: 3000  
-      // }).present();
+  // async ionViewWillLoad() {
+  //   await this.afAuth.authState.subscribe(data => {
+  //     // this.toast.create({
+  //     //   message: `Welcome back, ${data.email}`,
+  //     //   duration: 3000  
+  //     // }).present();
 
-      this.profileData = this.afDatabase.object(`profile/${data.uid}`);
+  //     this.profileData = this.afDatabase.object(`profile/${data.uid}`);
 
-    })
-  }
+  //   })
+  // }
 
 }
