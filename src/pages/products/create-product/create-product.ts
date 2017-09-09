@@ -63,14 +63,16 @@ export class CreateProductPage {
   currentImage: any = 'assets/images/new-image.png';
   image: any;
   picURL: any;
-  
-    options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true
-    }
+
+  options: CameraOptions = {
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    correctOrientation: true,
+    targetHeight: 600,
+    targetWidth: 600
+  }
 
   getCategory(category: any) {
     return this.types[category];
@@ -84,37 +86,42 @@ export class CreateProductPage {
     this.camera.getPicture(this.options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-        if (base64Image != null) {
-          this.currentImage = base64Image;
-          this.image = imageData;
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      if (base64Image != null) {
+        this.currentImage = base64Image;
+        this.image = imageData;
 
-          const pictures = storage().ref('pictures/' + this.generateUUID());
-          pictures.putString(base64Image, 'data_url').then(imagedata=> {
-            this.product.imageURL = imagedata.downloadURL;
-          });
+        const pictures = storage().ref('products/' + this.generateUUID());
+        pictures.putString(base64Image, 'data_url').then(imagedata => {
+          this.product.imageURL = imagedata.downloadURL;
+        });
 
-        } else {
-          this.currentImage = 'assets/images/new-image.png';
-        }
+      } else {
+        this.currentImage = 'assets/images/new-image.png';
+        this.product.imageURL = this.currentImage;
+      }
 
     })
   }
 
-generateUUID() {
+  generateUUID() {
     var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
     return uuid;
-};
-
+  };
 
   createProduct() {
+    var d = new Date().toISOString();
+
+    this.product.id = this.generateUUID();
+    this.product.createdDate = d;
+    
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.list(`products`).push(this.product)
+      this.afDatabase.list(`product`).push(this.product)
         .then(() => this.navCtrl.push(ProductsPage))
     })
   }

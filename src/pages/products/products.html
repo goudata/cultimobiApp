@@ -12,7 +12,7 @@
 
 </ion-header>
 
-
+<!-- 
 <ion-content padding>
   <ion-fab right top edge>
       <button ion-fab (click)="goToNewProduct()">
@@ -22,12 +22,28 @@
   <ion-list>
     <ion-item *ngFor="let item of products">
       <ion-thumbnail item-start>
-        <img src="assets/images/002-weed.png">
+        <img src="{{item.imageURL}}">
       </ion-thumbnail>
-      <h4>{{item.itemName}}</h4>
-      <h3>ID: {{item.plantId}} - Batch #: {{item.batchNo}}</h3>
-      <p>Created: {{item.createdDate}}</p>
-      <button ion-button clear item-end (click)="showDetail(item.plantId)">View</button>
+      <h4>{{item.name}}</h4>
+      <p>Created: {{item.createdDate | date}}</p>
+      <button ion-button clear item-end (click)="showDetail(item.id)">View</button>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content> -->
+
+<ion-content class="card-background-page">
+  
+    <ion-fab right top edge>
+        <button ion-fab (click)="goToNewProduct()">
+            <ion-icon name="md-add-circle"></ion-icon>
+          </button>
+      </ion-fab>
+    <ion-card *ngFor="let item of products">
+      <div class="crop">
+      <img src="{{item.imageURL}}">
+      <div class="card-title">{{item.name}}</div>
+      <div class="card-subtitle">{{item.description}}</div>
+      </div>
+    </ion-card>
+  
+  </ion-content>

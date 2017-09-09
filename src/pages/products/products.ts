@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateProductPage } from "./create-product/create-product";
+import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
+import { Product } from "../../models/product";
 
 /**
  * Generated class for the ProductsPage page.
@@ -16,31 +18,19 @@ import { CreateProductPage } from "./create-product/create-product";
 })
 export class ProductsPage {
 
-  products: any = 
-     [
-      {
-        plantId: 'PL0001',
-        itemName: 'Monopoly',
-        batchNo: 'BT00001',
-        uom: 'Each',
-        createdDate: '2017-01-01'
-      },
-      {
-        plantId: 'PL0002',
-        itemName: 'Monopoly',
-        batchNo: 'BT00002',
-        uom: 'Each',
-        createdDate: '2017-01-01'
-      }
-    ]
+  // products: FirebaseObjectObservable<Product>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  products = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afDatabase: AngularFireDatabase) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProductsPage');
+  ionViewWillEnter() {
+    this.afDatabase.list('product').forEach(data=> { 
+      this.products = data;
+    }); 
   }
-
+ 
   goToNewProduct() {
     this.navCtrl.push(CreateProductPage);
   }
