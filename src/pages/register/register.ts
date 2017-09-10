@@ -35,7 +35,7 @@ export class RegisterPage {
         message: error,
         duration: 3000,
         position: 'center'
-      })
+      }).present();
     }
   }
 

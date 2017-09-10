@@ -35,15 +35,14 @@ export class LoginPage {
           message: 'Email or Password Invalid.',
           duration: 3000,
           position: 'center'
-        })
+        }).present();
       }
-      console.log(result);
     } catch (error) {
       this.toast.create({
         message: error,
         duration: 3000,
         position: 'center'
-      })
+      }).present();
     }
   }
 
