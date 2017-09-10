@@ -119,4 +119,11 @@ export class ViewProductPage {
     })
   }
 
+  deleteProduct() {
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.afDatabase.object(`product/${this.key}`).remove()
+        .then(() => this.navCtrl.push(ProductsPage))
+    })
+  }
+
 }

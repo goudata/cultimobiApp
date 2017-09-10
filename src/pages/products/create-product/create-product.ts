@@ -61,6 +61,7 @@ export class CreateProductPage {
   }
 
   currentImage: any = 'assets/images/new-image.png';
+  imageUpload = false;
 
   options: CameraOptions = {
     quality: 75,
@@ -82,6 +83,7 @@ export class CreateProductPage {
     this.camera.getPicture(this.options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
+      
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       if (base64Image != null) {
         this.currentImage = base64Image;
@@ -89,6 +91,7 @@ export class CreateProductPage {
         const pictures = storage().ref('products/' + this.generateUUID());
         pictures.putString(base64Image, 'data_url').then(imagedata => {
           this.product.imageURL = imagedata.downloadURL;
+          this.imageUpload = true;
         });
 
       } else {
@@ -114,6 +117,10 @@ export class CreateProductPage {
 
     this.product.id = this.generateUUID();
     this.product.createdDate = d;
+
+    if(!this.imageUpload){
+      this.product.imageURL = this.currentImage;
+    }
 
     this.afAuth.authState.take(1).subscribe(auth => {
       this.afDatabase.list(`product`).push(this.product)
