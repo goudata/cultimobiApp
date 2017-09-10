@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Product } from "../../../models/product";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
@@ -8,7 +8,7 @@ import { CameraOptions, Camera } from "@ionic-native/camera";
 import { storage } from "firebase";
 
 /**
- * Generated class for the CreateProductPage page.
+ * Generated class for the ViewProductPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
@@ -16,23 +16,35 @@ import { storage } from "firebase";
 
 @IonicPage()
 @Component({
-  selector: 'page-create-product',
-  templateUrl: 'create-product.html',
+  selector: 'page-view-product',
+  templateUrl: 'view-product.html',
 })
-export class CreateProductPage {
-
-
-  constructor(public camera: Camera, public toast: ToastController, public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
-  }
-
-
-  public date: string = new Date().toISOString();
-
-  public event = {
-    month: this.date
-  }
+export class ViewProductPage {
 
   product = {} as Product;
+  currentImage: any;
+  key: any;
+
+  options: CameraOptions = {
+    quality: 75,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    correctOrientation: true
+  }
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private afAuth: AngularFireAuth, 
+              private afDatabase: AngularFireDatabase,
+              private camera: Camera
+            ) {
+
+    const detail = this.navParams.get('info') 
+    this.key = detail.$key;
+    this.product = this.navParams.get('info');
+    this.currentImage = this.product.imageURL;
+  }
 
   types: any = {
     'Cannabis': [
@@ -58,16 +70,6 @@ export class CreateProductPage {
       }
 
     ]
-  }
-
-  currentImage: any = 'assets/images/new-image.png';
-
-  options: CameraOptions = {
-    quality: 75,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    correctOrientation: true
   }
 
   getCategory(category: any) {
@@ -109,15 +111,12 @@ export class CreateProductPage {
     return uuid;
   };
 
-  createProduct() {
-    var d = new Date().toISOString();
-
-    this.product.id = this.generateUUID();
-    this.product.createdDate = d;
-
+  updateProduct() {
+   
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.list(`product`).push(this.product)
+      this.afDatabase.object(`product/${this.key}`).set(this.product)
         .then(() => this.navCtrl.push(ProductsPage))
     })
   }
+
 }

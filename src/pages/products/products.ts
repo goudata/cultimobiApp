@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateProductPage } from "./create-product/create-product";
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 import { Product } from "../../models/product";
+import { ViewProductPage } from "../products/view-product/view-product";
 
 /**
  * Generated class for the ProductsPage page.
@@ -29,6 +30,10 @@ export class ProductsPage {
     this.afDatabase.list('product').forEach(data=> { 
       this.products = data;
     }); 
+  }
+
+  showDetail(data: any) {
+    this.navCtrl.push(ViewProductPage, {info: data});
   }
  
   goToNewProduct() {

@@ -38,10 +38,11 @@
             <ion-icon name="md-add-circle"></ion-icon>
           </button>
       </ion-fab>
-    <ion-card *ngFor="let item of products">
+    <ion-card (click)="showDetail(item)" *ngFor="let item of products">
       <div class="crop">
       <img src="{{item.imageURL}}">
-      <div class="card-title">{{item.name}}</div>
+      <div class="card-title highlighted">{{item.name}}</div>
+      <br />
       <div class="card-subtitle">{{item.description}}</div>
       </div>
     </ion-card>

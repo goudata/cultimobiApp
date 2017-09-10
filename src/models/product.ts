@@ -8,4 +8,5 @@ export interface Product {
     uom: string;
     imageURL: any;
     createdDate: any;
+    updatedDate: any;
 }

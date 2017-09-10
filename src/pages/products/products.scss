@@ -1,15 +1,17 @@
 .card-background-page {
+    background-color: #333;
   ion-card {
     position: relative;
     text-align: center;
   }
   .card-title {
     position: absolute;
-    top: 36%;
+    top: 30%;
     font-size: 2.0em;
     width: 100%;
     font-weight: bold;
     color: #fff;
+    text-shadow: 2px 2px #333;
   }
   .card-subtitle {
     font-size: 1.0em;
@@ -17,18 +19,22 @@
     top: 52%;
     width: 100%;
     color: #fff;
+    text-shadow: 1px 1px #333;
   }
 }
 
 .crop {
-    width: 600px;
-    height: 150px;
     overflow: hidden;
+    height: 200px;
 }
 
 .crop img {
-    width: 600px;
-    height: 600px;
-    margin: -75px 0 0 -100px;
+    position: relative; /* allows repositioning */
+    margin: -75px 0 0 0;
 }
+
+.highlighted {
+    background-color: rgba(0,0,0,.5);
+}
+
 
