@@ -9,6 +9,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { LoginPage } from "../login/login";
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
 import { Profile } from "../../models/profile";
+import { ManagePage } from "../manage/manage";
 
 @IonicPage()
 @Component({
@@ -38,6 +39,10 @@ export class HomePage {
 
   goToProducts() {
     this.navCtrl.push(ProductsPage)
+  }
+
+  goToManage() {
+    this.navCtrl.push(ManagePage)
   }
 
   ionViewWillLoad() {

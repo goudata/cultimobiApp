@@ -27,6 +27,9 @@ import { ProfilePage } from "../pages/profile/profile";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { ViewProductPage } from "../pages/products/view-product/view-product";
 import { LogoutPage } from "../pages/logout/logout";
+import { ManagePage } from "../pages/manage/manage";
+import { ManageLocationsPage } from "../pages/manage/manage-locations/manage-locations";
+import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { LogoutPage } from "../pages/logout/logout";
     RegisterPage,
     ProfilePage,
     ViewProductPage,
-    LogoutPage
+    LogoutPage,
+    ManagePage,
+    ManageLocationsPage,
+    ManageUsersPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,10 @@ import { LogoutPage } from "../pages/logout/logout";
     RegisterPage,
     ProfilePage,
     ViewProductPage ,
-    LogoutPage
+    LogoutPage,
+    ManagePage,
+    ManageLocationsPage,
+    ManageUsersPage
   ],
   providers: [
     StatusBar,
