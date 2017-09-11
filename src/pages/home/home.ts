@@ -45,9 +45,9 @@ export class HomePage {
     this.navCtrl.push(ManagePage)
   }
 
-  ionViewWillLoad() {
+  ionViewDidLoad() {
     this.afAuth.authState.subscribe(data => {
-      if (data && data.email && data.uid) {
+      if (data && data.email && data.uid && data.emailVerified) {
         this.toast.create({
           message: `Welcome back, ${data.email}`,
           duration: 3000

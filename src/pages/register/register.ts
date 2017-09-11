@@ -27,6 +27,22 @@ export class RegisterPage {
     try {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.email);
       if(result){
+        var USER = this.afAuth.auth.currentUser;
+        USER.sendEmailVerification().then(function(){
+        }).catch(function(err){
+          this.toast.create({
+            message: err,
+            duration: 3000,
+            position: 'center'
+          }).present();
+        })
+
+        this.toast.create({
+          message: 'Please check your email to verify your account before you log in.',
+          duration: 6000,
+          position: 'center'
+        }).present();
+
         this.navCtrl.setRoot(LoginPage);
       }
       console.log(result);

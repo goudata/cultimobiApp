@@ -28,9 +28,11 @@ export class LoginPage {
   async login(user: User) {
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.email);
-      if(result){
+      
+      if(result && result.emailVerified){
         this.navCtrl.setRoot(HomePage);
       } else {
+        this.afAuth.auth.signOut();
         this.toast.create({
           message: 'Email or Password Invalid.',
           duration: 3000,
