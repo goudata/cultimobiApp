@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CreateProductPage } from "./create-product/create-product";
 import { FirebaseObjectObservable, AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
 import { Product } from "../../models/product";
 import { ViewProductPage } from "../products/view-product/view-product";
 
@@ -23,11 +24,12 @@ export class ProductsPage {
 
   products = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afDatabase: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth) {
   }
 
   ionViewWillEnter() {
-    this.afDatabase.list('product').forEach(data=> { 
+    let USER = this.afAuth.auth.currentUser;
+    this.afDatabase.list(`products/${USER.uid}`).forEach(data=> { 
       this.products = data;
     }); 
   }

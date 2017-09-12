@@ -88,7 +88,9 @@ export class ViewProductPage {
       if (base64Image != null) {
         this.currentImage = base64Image;
 
-        const pictures = storage().ref('products/' + this.generateUUID());
+        let USER = this.afAuth.auth.currentUser;
+
+        const pictures = storage().ref(`products/${USER.uid}/${this.generateUUID()}`);
         pictures.putString(base64Image, 'data_url').then(imagedata => {
           this.product.imageURL = imagedata.downloadURL;
         });
@@ -114,14 +116,14 @@ export class ViewProductPage {
   updateProduct() {
    
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.object(`product/${this.key}`).set(this.product)
+      this.afDatabase.object(`products/${auth.uid}/${this.key}`).set(this.product)
         .then(() => this.navCtrl.push(ProductsPage))
     })
   }
 
   deleteProduct() {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.object(`product/${this.key}`).remove()
+      this.afDatabase.object(`products/${auth.uid}/${this.key}`).remove()
         .then(() => this.navCtrl.push(ProductsPage))
     })
   }
