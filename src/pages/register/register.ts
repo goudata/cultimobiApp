@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { User } from "../../models/user";
 import { AngularFireAuth } from "angularfire2/auth";
 import { LoginPage } from "../login/login";
+import { AngularFireDatabase } from "angularfire2/database";
 
 /**
  * Generated class for the RegisterPage page.
@@ -20,7 +21,7 @@ export class RegisterPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, public toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   async register(user: User) {
@@ -38,14 +39,17 @@ export class RegisterPage {
         })
 
         this.toast.create({
-          message: 'Please check your email to verify your account before you log in.',
+          message: `Please check your email ${USER.email} to verify your account before you log in.`,
           duration: 6000,
           position: 'center'
         }).present();
 
+        this.afAuth.authState.take(1).subscribe(auth => {
+          this.afDatabase.object(`users/${auth.uid}`).set(this.user)
+        })
+
         this.navCtrl.setRoot(LoginPage);
       }
-      console.log(result);
     } catch (error) {
       this.toast.create({
         message: error,

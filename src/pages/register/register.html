@@ -16,6 +16,21 @@
 <ion-content padding>
 
   <ion-item>
+    <ion-label floating>First Name</ion-label>
+    <ion-input type="text" [(ngModel)]="user.firstName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Last Name</ion-label>
+    <ion-input type="text" [(ngModel)]="user.lastName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Phone Number</ion-label>
+    <ion-input type="tel" [(ngModel)]="user.phoneNumber"></ion-input>
+  </ion-item>
+
+  <ion-item>
     <ion-label floating>Email Address</ion-label>
     <ion-input type="text" [(ngModel)]="user.email"></ion-input>
   </ion-item>
