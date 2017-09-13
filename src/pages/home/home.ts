@@ -48,10 +48,10 @@ export class HomePage {
   ionViewDidLoad() {
     this.afAuth.authState.subscribe(data => {
       if (data && data.email && data.uid && data.emailVerified) {
-        this.toast.create({
-          message: `Welcome back, ${data.email}`,
-          duration: 3000
-        }).present();
+        // this.toast.create({
+        //   message: `Welcome back, ${data.email}`,
+        //   duration: 3000
+        // }).present();
       } else {
         this.navCtrl.setRoot(LoginPage);
       }

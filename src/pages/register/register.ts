@@ -45,6 +45,7 @@ export class RegisterPage {
         }).present();
 
         this.afAuth.authState.take(1).subscribe(auth => {
+          this.user.createdDate = Date.now();
           this.afDatabase.object(`users/${auth.uid}`).set(this.user)
         })
 

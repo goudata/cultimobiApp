@@ -29,15 +29,15 @@ export class ProductsPage {
 
   ionViewWillEnter() {
     let USER = this.afAuth.auth.currentUser;
-    this.afDatabase.list(`products/${USER.uid}`).forEach(data=> { 
+    this.afDatabase.list(`products/${USER.uid}`).forEach(data=> {
       this.products = data;
-    }); 
+    });
   }
 
   showDetail(data: any) {
     this.navCtrl.push(ViewProductPage, {info: data});
   }
- 
+
   goToNewProduct() {
     this.navCtrl.push(CreateProductPage);
   }

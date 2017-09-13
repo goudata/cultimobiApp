@@ -1,5 +1,4 @@
 export interface Product {
-    id: string;
     name: string;
     description: string;
     type: string;
@@ -7,6 +6,9 @@ export interface Product {
     group: string;
     uom: string;
     imageURL: any;
+    members: object;
+    createdBy: string;
     createdDate: any;
+    updatedBy: string;
     updatedDate: any;
 }

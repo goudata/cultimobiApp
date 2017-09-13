@@ -15,9 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PlantsPage {
 
-  stageType = '';
-  safari = 'Shared Links';
-  weather = 'sunny';
+  stageType = 'All';
 
   stages: any = {
     'Clone': [
@@ -150,45 +148,8 @@ export class PlantsPage {
     ]
   };
 
-  items: any = {
-    'Bookmarks': [
-      {
-        name: 'Favorites',
-        icon: 'ios-star-outline'
-      },
-      {
-        name: 'History',
-        icon: 'ios-clock-outline'
-      }
-    ],
-    'Reading List': [
-      {
-        name: 'Terms of Service',
-        icon: 'create'
-      },
-      {
-        name: 'User Guide',
-        icon: 'book'
-      }
-    ],
-    'Shared Links': [
-      {
-        name: 'Ionic Framework',
-        icon: 'ionic'
-      },
-      {
-        name: 'Learn Angular',
-        icon: 'logo-angular'
-      }
-    ]
-  };
-
   getItems(type: any) {
     return this.stages[type];
-  }
-
-  getSafariItems(type: any) {
-    return this.items[type];
   }
 
   id: any;

@@ -33,14 +33,14 @@ export class ViewProductPage {
     correctOrientation: true
   }
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private afAuth: AngularFireAuth, 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private afAuth: AngularFireAuth,
               private afDatabase: AngularFireDatabase,
               private camera: Camera
             ) {
 
-    const detail = this.navParams.get('info') 
+    const detail = this.navParams.get('info')
     this.key = detail.$key;
     this.product = this.navParams.get('info');
     this.currentImage = this.product.imageURL;
@@ -90,7 +90,7 @@ export class ViewProductPage {
 
         let USER = this.afAuth.auth.currentUser;
 
-        const pictures = storage().ref(`products/${USER.uid}/${this.generateUUID()}`);
+        const pictures = storage().ref(`users/${USER.uid}/products/${this.generateUUID()}`);
         pictures.putString(base64Image, 'data_url').then(imagedata => {
           this.product.imageURL = imagedata.downloadURL;
         });
@@ -114,17 +114,19 @@ export class ViewProductPage {
   };
 
   updateProduct() {
-   
+
     this.afAuth.authState.take(1).subscribe(auth => {
+      this.product.updatedBy = auth.uid;
+      this.product.updatedDate = Date.now();
       this.afDatabase.object(`products/${auth.uid}/${this.key}`).set(this.product)
-        .then(() => this.navCtrl.push(ProductsPage))
+        .then(() => this.navCtrl.pop())
     })
   }
 
   deleteProduct() {
     this.afAuth.authState.take(1).subscribe(auth => {
       this.afDatabase.object(`products/${auth.uid}/${this.key}`).remove()
-        .then(() => this.navCtrl.push(ProductsPage))
+        .then(() => this.navCtrl.pop())
     })
   }
 

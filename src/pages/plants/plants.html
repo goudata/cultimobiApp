@@ -11,24 +11,58 @@
 </ion-header>
 
 <ion-content class="plant-background">
-  <ion-toolbar no-border-top>
-    <ion-list>
-      <ion-list-header>Select Stage</ion-list-header>
 
-      <ion-item>
-        <ion-label>Stage</ion-label>
-        <ion-select [(ngModel)]="stageType">
-          <ion-option value="Clone">Clone</ion-option>
-          <ion-option value="Vegetation">Vegetation</ion-option>
-          <ion-option value="Flower">Flower</ion-option>
-          <ion-option value="Harvest">Harvest</ion-option>
-          <ion-option value="Dry">Dry</ion-option>
-          <ion-option value="Cure">Cure</ion-option>
-          <ion-option value="Developed">Developed</ion-option>
-          <ion-option value="Destroyed">Destroyed</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
+
+
+  <ion-toolbar no-border-top>
+    <div>
+      <ion-segment mode="md" [(ngModel)]="stageType">
+        <ion-segment-button value="All">
+          All
+        </ion-segment-button>
+        <ion-segment-button value="Clone">
+          clone
+        </ion-segment-button>
+        <ion-segment-button value="Vegetation">
+          Vegetation
+        </ion-segment-button>
+        <ion-segment-button value="Flowering">
+          Flowering
+        </ion-segment-button>
+        <ion-segment-button value="Harvest">
+          Harvest
+        </ion-segment-button>
+        <ion-segment-button value="Dry">
+          Dry
+        </ion-segment-button>
+        <ion-segment-button value="Cure">
+          Cure
+        </ion-segment-button>
+        <ion-segment-button value="Developed">
+          Developed
+        </ion-segment-button>
+        <ion-segment-button value="Destroyed">
+          Destroyed
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <!--<ion-list>-->
+      <!--<ion-list-header>Select Stage</ion-list-header>-->
+
+      <!--<ion-item>-->
+        <!--<ion-label>Stage</ion-label>-->
+        <!--<ion-select [(ngModel)]="stageType">-->
+          <!--<ion-option value="Clone">Clone</ion-option>-->
+          <!--<ion-option value="Vegetation">Vegetation</ion-option>-->
+          <!--<ion-option value="Flower">Flower</ion-option>-->
+          <!--<ion-option value="Harvest">Harvest</ion-option>-->
+          <!--<ion-option value="Dry">Dry</ion-option>-->
+          <!--<ion-option value="Cure">Cure</ion-option>-->
+          <!--<ion-option value="Developed">Developed</ion-option>-->
+          <!--<ion-option value="Destroyed">Destroyed</ion-option>-->
+        <!--</ion-select>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
   </ion-toolbar>
 
   <ion-list>
