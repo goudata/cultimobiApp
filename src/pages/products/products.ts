@@ -34,6 +34,7 @@ export class ProductsPage {
     this.afDatabase.list(`gardens`).forEach(data => {
       data.map(res => {
         const productRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`products`);
+        const membersRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`members`);
 
         if(res.createdBy == USER.uid){
 
@@ -41,6 +42,15 @@ export class ProductsPage {
             this.updateProduct(snapshot.val(), snapshot.key);
           })
 
+        } else {
+
+          membersRef.on('child_added', snapshot => {
+            if(snapshot.val() == USER.uid){
+              productRef.on('child_added', snapshot => {
+                this.updateProduct(snapshot.val(), snapshot.key);
+              })
+            }
+          })
         }
       })
     })
