@@ -1,0 +1,46 @@
+<!--
+  Generated template for the CreateGardenPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Garden</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" [(ngModel)]="garden.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Type</ion-label>
+    <ion-select [(ngModel)]="garden.type">
+      <ion-option value="Cannabis">Cannabis</ion-option>
+      <ion-option value="Fruits">Fruits</ion-option>
+      <ion-option value="Vegetables">Vegetables</ion-option>
+      <ion-option value="Flowers">Flowers</ion-option>
+      <ion-option value="Other">Other</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Capacity</ion-label>
+    <ion-input type="text" [(ngModel)]="garden.capacity"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Notes</ion-label>
+    <ion-input type="text" [(ngModel)]="garden.notes"></ion-input>
+  </ion-item>
+
+  <button ion-button full (click)="createGarden()">Add Garden</button>
+
+</ion-content>

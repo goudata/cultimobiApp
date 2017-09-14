@@ -31,6 +31,8 @@ import { ManagePage } from "../pages/manage/manage";
 import { ManageLocationsPage } from "../pages/manage/manage-locations/manage-locations";
 import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
 import {GardensPage} from "../pages/gardens/gardens";
+import {CreateGardenPage} from "../pages/gardens/create-garden/create-garden";
+import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import {GardensPage} from "../pages/gardens/gardens";
     ManagePage,
     ManageLocationsPage,
     ManageUsersPage,
-    GardensPage
+    GardensPage,
+    CreateGardenPage,
+    ViewGardenPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,9 @@ import {GardensPage} from "../pages/gardens/gardens";
     ManagePage,
     ManageLocationsPage,
     ManageUsersPage,
-    GardensPage
+    GardensPage,
+    CreateGardenPage,
+    ViewGardenPage
   ],
   providers: [
     StatusBar,

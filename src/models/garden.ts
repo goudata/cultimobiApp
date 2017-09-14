@@ -10,6 +10,6 @@ export interface Garden {
   plants: object;
   createdDate: any;
   createdBy: string;
-  updateDate: any;
+  updatedDate: any;
   updatedBy: string;
 }
