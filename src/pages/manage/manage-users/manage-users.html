@@ -15,4 +15,15 @@
 
 <ion-content padding>
 
+  <ion-item *ngFor="let user of userList">
+    <ion-avatar item-start>
+      <img src="{{user?.avatar}}">
+    </ion-avatar>
+    <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+    <p>{{user?.email}}</p>
+    <ion-note item-end>{{user?.createdDate | date }}</ion-note>
+    <button ion-button clear item-end>View</button>
+  </ion-item>
+
+
 </ion-content>

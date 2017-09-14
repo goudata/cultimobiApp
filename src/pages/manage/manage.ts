@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ManageLocationsPage } from "./manage-locations/manage-locations";
 import { ManageUsersPage } from "./manage-users/manage-users";
+import {GardensPage} from "../gardens/gardens";
 
 /**
  * Generated class for the ManagePage page.
@@ -26,6 +27,10 @@ export class ManagePage {
 
   goToUsers() {
     this.navCtrl.push(ManageUsersPage);
+  }
+
+  goToGardens() {
+    this.navCtrl.push(GardensPage);
   }
 
 }

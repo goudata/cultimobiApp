@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { User } from '../../../models/user';
+import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
 /**
  * Generated class for the ManageUsersPage page.
  *
@@ -15,11 +17,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ManageUsersPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userList = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth) {
+    let USER = this.afAuth.auth.currentUser;
+    this.afDatabase.list(`users`).forEach(data=> {
+      data.map(res => {
+        if(res && res.$key != USER.uid) {
+          this.userList.push(res);
+        }
+      });
+    });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ManageUsersPage');
-  }
-
 }

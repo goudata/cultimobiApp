@@ -8,6 +8,8 @@ export interface Product {
     uom: string;
     imageURL: any;
     members: object;
+    gardenId: string;
+    productId: string;
     createdBy: string;
     createdDate: any;
     updatedBy: string;

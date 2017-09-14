@@ -30,6 +30,7 @@ import { LogoutPage } from "../pages/logout/logout";
 import { ManagePage } from "../pages/manage/manage";
 import { ManageLocationsPage } from "../pages/manage/manage-locations/manage-locations";
 import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
+import {GardensPage} from "../pages/gardens/gardens";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
     LogoutPage,
     ManagePage,
     ManageLocationsPage,
-    ManageUsersPage
+    ManageUsersPage,
+    GardensPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
     LogoutPage,
     ManagePage,
     ManageLocationsPage,
-    ManageUsersPage
+    ManageUsersPage,
+    GardensPage
   ],
   providers: [
     StatusBar,

@@ -118,7 +118,8 @@ export class ViewProductPage {
     this.afAuth.authState.take(1).subscribe(auth => {
       this.product.updatedBy = auth.uid;
       this.product.updatedDate = Date.now();
-      this.afDatabase.object(`products/${this.key}`).set(this.product)
+
+      this.afDatabase.object(`gardens/${this.product.gardenId}/products/${this.product.productId}`).set(this.product)
         .then(() => this.navCtrl.pop())
     })
   }

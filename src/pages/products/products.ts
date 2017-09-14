@@ -28,18 +28,27 @@ export class ProductsPage {
   }
 
   ionViewWillEnter() {
+    this.products = [];
     let USER = this.afAuth.auth.currentUser;
-    this.afDatabase.list(`products`).forEach(data=> {
+
+    this.afDatabase.list(`gardens`).forEach(data => {
       data.map(res => {
+        const productRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`products`);
+
         if(res.createdBy == USER.uid){
-          this.products.push(res);
-        } else {
-          if(res.members && res.members.userkey == USER.uid){
-            this.products.push(res);
-          }
+
+          productRef.on('child_added', snapshot => {
+            this.updateProduct(snapshot.val(), snapshot.key);
+          })
+
         }
-      });
-    });
+      })
+    })
+  }
+
+  updateProduct(data, key){
+    data.productId = key;
+    this.products.push(data);
   }
 
   showDetail(data: any) {

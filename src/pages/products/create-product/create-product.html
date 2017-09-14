@@ -21,6 +21,13 @@
   <ion-list padding>
 
     <ion-item>
+      <ion-label>Garden</ion-label>
+      <ion-select [(ngModel)]="product.gardenId">
+        <ion-option *ngFor="let garden of gardens" value="{{garden.$key}}">{{garden.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-label floating>Product Name</ion-label>
       <ion-input [(ngModel)]="product.name" type="text"></ion-input>
     </ion-item>

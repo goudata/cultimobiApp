@@ -6,6 +6,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { ProductsPage } from "../products";
 import { CameraOptions, Camera } from "@ionic-native/camera";
 import { storage } from "firebase";
+import {Garden} from "../../../models/garden";
 
 /**
  * Generated class for the CreateProductPage page.
@@ -21,8 +22,21 @@ import { storage } from "firebase";
 })
 export class CreateProductPage {
 
+  gardens = [];
 
   constructor(public camera: Camera, public toast: ToastController, public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
+    let USER = this.afAuth.auth.currentUser;
+    this.afDatabase.list(`gardens`).forEach(data=> {
+      data.map(res => {
+        if(res.createdBy == USER.uid){
+          this.gardens.push(res);
+        } else {
+          if(res.members && res.members.userkey == USER.uid){
+            this.gardens.push(res);
+          }
+        }
+      });
+    });
   }
 
 
@@ -124,7 +138,8 @@ export class CreateProductPage {
       this.product.createdBy = auth.uid;
       this.product.createdDate = Date.now();
       this.product.isActive = true;
-      this.afDatabase.list(`products`).push(this.product)
+
+      this.afDatabase.list(`gardens/${this.product.gardenId}/products`).push(this.product)
         .then(() => this.navCtrl.pop())
     })
   }
