@@ -1,4 +1,5 @@
 export interface Product {
+    isActive: boolean;
     name: string;
     description: string;
     type: string;

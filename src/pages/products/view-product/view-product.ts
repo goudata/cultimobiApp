@@ -118,14 +118,14 @@ export class ViewProductPage {
     this.afAuth.authState.take(1).subscribe(auth => {
       this.product.updatedBy = auth.uid;
       this.product.updatedDate = Date.now();
-      this.afDatabase.object(`products/${auth.uid}/${this.key}`).set(this.product)
+      this.afDatabase.object(`products/${this.key}`).set(this.product)
         .then(() => this.navCtrl.pop())
     })
   }
 
   deleteProduct() {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.object(`products/${auth.uid}/${this.key}`).remove()
+      this.afDatabase.object(`products/${this.key}`).remove()
         .then(() => this.navCtrl.pop())
     })
   }

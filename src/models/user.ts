@@ -4,6 +4,7 @@ export interface User {
     phoneNumber: string;
     email: string;
     password: string;
+    avatar: string;
     createdDate: any;
     updateDate: any;
 }

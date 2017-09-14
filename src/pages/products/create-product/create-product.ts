@@ -123,7 +123,8 @@ export class CreateProductPage {
     this.afAuth.authState.take(1).subscribe(auth => {
       this.product.createdBy = auth.uid;
       this.product.createdDate = Date.now();
-      this.afDatabase.list(`products/${auth.uid}`).push(this.product)
+      this.product.isActive = true;
+      this.afDatabase.list(`products`).push(this.product)
         .then(() => this.navCtrl.pop())
     })
   }

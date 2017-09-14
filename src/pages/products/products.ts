@@ -29,8 +29,16 @@ export class ProductsPage {
 
   ionViewWillEnter() {
     let USER = this.afAuth.auth.currentUser;
-    this.afDatabase.list(`products/${USER.uid}`).forEach(data=> {
-      this.products = data;
+    this.afDatabase.list(`products`).forEach(data=> {
+      data.map(res => {
+        if(res.createdBy == USER.uid){
+          this.products.push(res);
+        } else {
+          if(res.members && res.members.userkey == USER.uid){
+            this.products.push(res);
+          }
+        }
+      });
     });
   }
 
