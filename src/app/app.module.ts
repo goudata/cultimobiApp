@@ -28,11 +28,11 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { ViewProductPage } from "../pages/products/view-product/view-product";
 import { LogoutPage } from "../pages/logout/logout";
 import { ManagePage } from "../pages/manage/manage";
-import { ManageLocationsPage } from "../pages/manage/manage-locations/manage-locations";
 import { ManageUsersPage } from "../pages/manage/manage-users/manage-users";
 import {GardensPage} from "../pages/gardens/gardens";
 import {CreateGardenPage} from "../pages/gardens/create-garden/create-garden";
 import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
+import { AddToGardenPage } from '../pages/manage/add-to-garden/add-to-garden';
 
 @NgModule({
   declarations: [
@@ -53,11 +53,11 @@ import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
     ViewProductPage,
     LogoutPage,
     ManagePage,
-    ManageLocationsPage,
     ManageUsersPage,
     GardensPage,
     CreateGardenPage,
-    ViewGardenPage
+    ViewGardenPage,
+    AddToGardenPage
   ],
   imports: [
     BrowserModule,
@@ -85,11 +85,11 @@ import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
     ViewProductPage ,
     LogoutPage,
     ManagePage,
-    ManageLocationsPage,
     ManageUsersPage,
     GardensPage,
     CreateGardenPage,
-    ViewGardenPage
+    ViewGardenPage,
+    AddToGardenPage
   ],
   providers: [
     StatusBar,

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../../models/user';
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
+import { AddToGardenPage } from '../add-to-garden/add-to-garden';
 /**
  * Generated class for the ManageUsersPage page.
  *
@@ -27,5 +28,9 @@ export class ManageUsersPage {
         }
       });
     });
+  }
+
+  showDetail(data: any) {
+    this.navCtrl.push(AddToGardenPage, {info: data});
   }
 }

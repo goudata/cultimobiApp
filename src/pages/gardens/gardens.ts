@@ -4,6 +4,7 @@ import {Garden} from "../../models/garden";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import {ViewGardenPage} from "./view-garden/view-garden";
+import {CreateGardenPage} from "./create-garden/create-garden";
 
 /**
  * Generated class for the GardensPage page.
@@ -25,17 +26,33 @@ export class GardensPage {
   }
 
   ionViewWillEnter() {
+    
     this.gardens = [];
     let USER = this.afAuth.auth.currentUser;
     this.afDatabase.list(`gardens`).forEach(data => {
       data.map(res => {
+        const membersRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`members`);
         if(res.createdBy == USER.uid){
 
           this.gardens.push(res)
 
+        } else {
+          membersRef.on('child_added', snapshot => {
+            if(snapshot.val() == USER.uid){
+                this.updateGarden(res);
+            }
+          })
         }
       })
     })
+  }
+
+  updateGarden(data){
+    this.gardens.push(data);
+  }
+
+  goToNewGarden() {
+    this.navCtrl.push(CreateGardenPage);
   }
 
   showDetail(data: any){

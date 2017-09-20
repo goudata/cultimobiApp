@@ -18,41 +18,6 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-card color="primary">
-              <ion-card-header>
-                Manage Locations
-              </ion-card-header>
-              <ion-card-content (click)="goToLocations()">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col>
-                      <div><img src="assets/images/002-map.png" /></div>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <ion-card color="dark">
-              <ion-card-header>
-                Manage Users
-              </ion-card-header>
-
-              <ion-card-content (click)="goToUsers()">
-                <ion-grid>
-                  <ion-row>
-                    <ion-col>
-                      <div><img src="assets/images/001-people.png" /></div>
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
             <ion-card color="leaf">
               <ion-card-header>
                 Manage Gardens
@@ -71,16 +36,16 @@
 
           </ion-col>
           <ion-col>
-            <ion-card color="purple">
+            <ion-card color="primary">
               <ion-card-header>
-                View All Products
+                Manage Users
               </ion-card-header>
 
-              <ion-card-content>
+              <ion-card-content (click)="goToUsers()">
                 <ion-grid>
                   <ion-row>
                     <ion-col>
-                      <div><img src="assets/images/002-weed.png" /></div>
+                      <div><img src="assets/images/001-people.png" /></div>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

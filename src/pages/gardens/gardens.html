@@ -15,6 +15,12 @@
 
 <ion-content padding>
 
+  <ion-fab right top edge>
+    <button ion-fab (click)="goToNewGarden()">
+      <ion-icon name="md-add-circle"></ion-icon>
+    </button>
+  </ion-fab>
+
   <ion-list>
     <ion-item *ngFor="let garden of gardens">
       <ion-thumbnail item-start>

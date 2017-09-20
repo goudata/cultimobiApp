@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from "@ionic-native/camera";
+import {AngularFireAuth} from "angularfire2/auth";
+import {AngularFireDatabase} from "angularfire2/database";
 
 /**
  * Generated class for the CreatePlantPage page.
@@ -25,7 +27,27 @@ export class CreatePlantPage {
     timeEnds: '1990-02-20'
   }
 
-  constructor(public navCtrl: NavController, public toast: ToastController, public navParams: NavParams, private camera: Camera) {
+  gardens = [];
+
+  constructor(public navCtrl: NavController,
+              public toast: ToastController,
+              public navParams: NavParams,
+              private camera: Camera,
+              private afAuth: AngularFireAuth,
+              private afDatabase: AngularFireDatabase) {
+
+    let USER = this.afAuth.auth.currentUser;
+    this.afDatabase.list(`gardens`).forEach(data=> {
+      data.map(res => {
+        if(res.createdBy == USER.uid){
+          this.gardens.push(res);
+        } else {
+          if(res.members && res.members.userkey == USER.uid){
+            this.gardens.push(res);
+          }
+        }
+      });
+    });
   }
 
   currentImage: any = 'assets/images/new-image.png';

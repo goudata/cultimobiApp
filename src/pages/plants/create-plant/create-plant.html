@@ -17,7 +17,7 @@
   <ion-card>
 
     <img (click)="takePhoto()" src="{{currentImage}}">
-    
+
     <!-- <ion-fab right top>
       <button ion-fab (click)="takePhoto()">
           <ion-icon name="md-add-circle"></ion-icon>
@@ -26,6 +26,13 @@
 
   </ion-card>
   <ion-list padding>
+
+    <ion-item>
+      <ion-label>Garden</ion-label>
+      <ion-select [(ngModel)]="product.gardenId">
+        <ion-option *ngFor="let garden of gardens" value="{{garden.$key}}">{{garden.name}}</ion-option>
+      </ion-select>
+    </ion-item>
 
     <ion-item>
       <ion-label>Order Date</ion-label>
@@ -40,6 +47,6 @@
         <ion-option value="Tissue">Tissue</ion-option>
       </ion-select>
     </ion-item>
-    
+
   </ion-list>
 </ion-content>

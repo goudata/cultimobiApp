@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ManageLocationsPage } from "./manage-locations/manage-locations";
 import { ManageUsersPage } from "./manage-users/manage-users";
 import {GardensPage} from "../gardens/gardens";
 
@@ -19,10 +18,6 @@ import {GardensPage} from "../gardens/gardens";
 export class ManagePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  goToLocations() {
-    this.navCtrl.push(ManageLocationsPage);
   }
 
   goToUsers() {

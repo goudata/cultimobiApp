@@ -22,7 +22,7 @@
     <h2>{{user?.firstName}} {{user?.lastName}}</h2>
     <p>{{user?.email}}</p>
     <ion-note item-end>{{user?.createdDate | date }}</ion-note>
-    <button ion-button clear item-end>View</button>
+    <button ion-button clear item-end (click)="showDetail(user)">View</button>
   </ion-item>
 
 
