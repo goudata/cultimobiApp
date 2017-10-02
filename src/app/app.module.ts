@@ -33,6 +33,7 @@ import {GardensPage} from "../pages/gardens/gardens";
 import {CreateGardenPage} from "../pages/gardens/create-garden/create-garden";
 import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
 import { AddToGardenPage } from '../pages/manage/add-to-garden/add-to-garden';
+import { ViewPlantPage } from '../pages/plants/view-plant/view-plant';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AddToGardenPage } from '../pages/manage/add-to-garden/add-to-garden';
     GardensPage,
     CreateGardenPage,
     ViewGardenPage,
-    AddToGardenPage
+    AddToGardenPage,
+    ViewPlantPage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { AddToGardenPage } from '../pages/manage/add-to-garden/add-to-garden';
     GardensPage,
     CreateGardenPage,
     ViewGardenPage,
-    AddToGardenPage
+    AddToGardenPage,
+    ViewPlantPage
   ],
   providers: [
     StatusBar,
