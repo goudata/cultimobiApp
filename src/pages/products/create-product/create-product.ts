@@ -7,6 +7,7 @@ import { ProductsPage } from "../products";
 import { CameraOptions, Camera } from "@ionic-native/camera";
 import { storage } from "firebase";
 import {Garden} from "../../../models/garden";
+import { GenerateUUID } from '../../../utilities/generate-uuid';
 
 /**
  * Generated class for the CreateProductPage page.
@@ -19,12 +20,21 @@ import {Garden} from "../../../models/garden";
 @Component({
   selector: 'page-create-product',
   templateUrl: 'create-product.html',
+  providers: [GenerateUUID]
 })
 export class CreateProductPage {
 
   gardens = [];
 
-  constructor(public camera: Camera, public toast: ToastController, public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
+  constructor(public camera: Camera,
+              public toast: ToastController, 
+              public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private afAuth: AngularFireAuth, 
+              private afDatabase: AngularFireDatabase,
+              private uuid: GenerateUUID
+            ) {
+              
     let USER = this.afAuth.auth.currentUser;
     this.afDatabase.list(`gardens`).forEach(data=> {
       data.map(res => {
@@ -104,7 +114,7 @@ export class CreateProductPage {
 
         let USER = this.afAuth.auth.currentUser;
 
-        const pictures = storage().ref(`products/${USER.uid}/${this.generateUUID()}`);
+        const pictures = storage().ref(`products/${USER.uid}/${this.uuid.generateUUID()}`);
         pictures.putString(base64Image, 'data_url').then(imagedata => {
           this.product.imageURL = imagedata.downloadURL;
           this.imageUpload = true;
@@ -117,16 +127,6 @@ export class CreateProductPage {
 
     })
   }
-
-  generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-  };
 
   createProduct() {
 

@@ -6,6 +6,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { Plant } from '../../../models/plant';
 import { storage } from 'firebase';
 import { ViewPlantPage } from '../view-plant/view-plant';
+import { GenerateUUID } from '../../../utilities/generate-uuid';
 
 /**
  * Generated class for the CreatePlantPage page.
@@ -18,6 +19,7 @@ import { ViewPlantPage } from '../view-plant/view-plant';
 @Component({
   selector: 'page-create-plant',
   templateUrl: 'create-plant.html',
+  providers: [GenerateUUID]
 })
 export class CreatePlantPage {
 
@@ -40,6 +42,7 @@ export class CreatePlantPage {
     public toast: ToastController,
     public navParams: NavParams,
     private camera: Camera,
+    private uuid: GenerateUUID,
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase) {
 
@@ -67,7 +70,7 @@ export class CreatePlantPage {
     correctOrientation: true
   }
 
-  async takePhoto() {
+  takePhoto() {
     this.camera.getPicture(this.options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
@@ -78,7 +81,7 @@ export class CreatePlantPage {
 
         let USER = this.afAuth.auth.currentUser;
 
-        const pictures = storage().ref(`products/${USER.uid}/${this.generateUUID()}`);
+        const pictures = storage().ref(`plants/${USER.uid}/${this.uuid.generateUUID()}`);
         pictures.putString(base64Image, 'data_url').then(imagedata => {
           this.plant.imageURL = imagedata.downloadURL;
           this.imageUpload = true;
@@ -126,17 +129,6 @@ export class CreatePlantPage {
     this.plants.push(data);
   }
 
-
-  generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-    return uuid;
-  };
-
   createPlant() {
     this.plants.push(this.plant)
     if (!this.imageUpload) {
@@ -155,7 +147,7 @@ export class CreatePlantPage {
 
   showDetail(data: any) {
     // console.log(data)
-    this.navCtrl.push(ViewPlantPage, {info: data}); 
+    this.navCtrl.push(ViewPlantPage, { info: data });
   }
 
 }
