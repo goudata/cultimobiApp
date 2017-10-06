@@ -16,9 +16,12 @@
 
   <ion-toolbar no-border-top>
     <div>
-      <ion-segment mode="md" [(ngModel)]="stageType">
+      <ion-segment mode="md" [(ngModel)]="stageType" (click)="getPlantsList()">
         <ion-segment-button value="All">
           All
+        </ion-segment-button>
+        <ion-segment-button value="Cut">
+          Cut
         </ion-segment-button>
         <ion-segment-button value="Clone">
           clone
@@ -26,8 +29,8 @@
         <ion-segment-button value="Vegetation">
           Vegetation
         </ion-segment-button>
-        <ion-segment-button value="Flowering">
-          Flowering
+        <ion-segment-button value="Flower">
+          Flower
         </ion-segment-button>
         <ion-segment-button value="Harvest">
           Harvest
@@ -46,34 +49,30 @@
         </ion-segment-button>
       </ion-segment>
     </div>
-    <!--<ion-list>-->
-      <!--<ion-list-header>Select Stage</ion-list-header>-->
-
-      <!--<ion-item>-->
-        <!--<ion-label>Stage</ion-label>-->
-        <!--<ion-select [(ngModel)]="stageType">-->
-          <!--<ion-option value="Clone">Clone</ion-option>-->
-          <!--<ion-option value="Vegetation">Vegetation</ion-option>-->
-          <!--<ion-option value="Flower">Flower</ion-option>-->
-          <!--<ion-option value="Harvest">Harvest</ion-option>-->
-          <!--<ion-option value="Dry">Dry</ion-option>-->
-          <!--<ion-option value="Cure">Cure</ion-option>-->
-          <!--<ion-option value="Developed">Developed</ion-option>-->
-          <!--<ion-option value="Destroyed">Destroyed</ion-option>-->
-        <!--</ion-select>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
   </ion-toolbar>
 
   <ion-list>
-    <ion-item *ngFor="let item of getItems(stageType)">
+    <ion-item *ngFor="let plant of plants">
       <ion-thumbnail item-start>
         <img src="assets/images/011-leaf.png">
       </ion-thumbnail>
-      <h4>{{item.itemName}}</h4>
-      <h3>ID: {{item.plantId}} - Batch #: {{item.batchNo}}</h3>
-      <p>Created: {{item.createdDate}}</p>
-      <button ion-button clear item-end (click)="showDetail(item.plantId)">View</button>
+      <h4>{{plant.itemName}}</h4>
+      <h3 *ngIf="stageType !== 'Cut'">Batch #: {{plant.batchNo}}</h3>
+      <h3 *ngIf="stageType === 'All'">Current Stage: {{plant.stage}}</h3>
+      <p>ID: {{plant.plantId}}</p>
+      <p>Created: {{plant.createdDate | date}}</p>
+      <button *ngIf="stageType === 'All'" ion-button clear item-end (click)="showPlantDetail(plant)">View</button>
+      <button *ngIf="stageType === 'Cut'" ion-button clear item-end (click)="showPlantDetail_Cut(plant)">Cut</button>
+      <button *ngIf="stageType === 'Clone'" ion-button clear item-end (click)="developClone(plant)">Develop</button>
+      <button *ngIf="stageType === 'Vegetation'" ion-button clear item-end (click)="developVegetation(plant)">Develop</button>
+      <button *ngIf="stageType === 'Flower'" ion-button clear item-end (click)="developFlower(plant)">Develop</button>
+      <button *ngIf="stageType === 'Harvest'" ion-button clear item-end (click)="showPlantDetail_Harvest(plant)">Harvest</button>
+      <button *ngIf="stageType === 'Dry'" ion-button clear item-end (click)="showPlantDetail_Dry(plant)">Dry</button>
+      <button *ngIf="stageType === 'Cure'" ion-button clear item-end (click)="showPlantDetail_Cure(plant)">Cure</button>
     </ion-item>
   </ion-list>
+
+  <div *ngIf="!plants.length" text-center>
+    <p style="color: #E4E4E4">NO PLANTS HAVE BEEN FOUND</p>
+  </div>
 </ion-content>

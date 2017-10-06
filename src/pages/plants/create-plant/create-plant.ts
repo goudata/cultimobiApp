@@ -6,7 +6,6 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { Plant } from '../../../models/plant';
 import { storage } from 'firebase';
 import { ViewPlantPage } from '../view-plant/view-plant';
-import { GenerateUUID } from '../../../utilities/generate-uuid';
 
 /**
  * Generated class for the CreatePlantPage page.
@@ -18,14 +17,13 @@ import { GenerateUUID } from '../../../utilities/generate-uuid';
 @IonicPage()
 @Component({
   selector: 'page-create-plant',
-  templateUrl: 'create-plant.html',
-  providers: [GenerateUUID]
+  templateUrl: 'create-plant.html'
 })
 export class CreatePlantPage {
 
-  public date: string = new Date().toISOString();
+  public date: string = new Date().toUTCString();
   plantOrigin: string;
-  stageType = 'add';
+
   currentImage: any = 'assets/images/new-image.png';
   imageUpload = false;
 
@@ -34,6 +32,7 @@ export class CreatePlantPage {
   }
 
   gardens = [];
+  products = [];
 
   plant = {} as Plant;
   plants = [];
@@ -42,7 +41,6 @@ export class CreatePlantPage {
     public toast: ToastController,
     public navParams: NavParams,
     private camera: Camera,
-    private uuid: GenerateUUID,
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase) {
 
@@ -51,14 +49,26 @@ export class CreatePlantPage {
     let USER = this.afAuth.auth.currentUser;
     this.afDatabase.list(`gardens`).forEach(data => {
       data.map(res => {
-        if (res.createdBy == USER.uid) {
-          this.gardens.push(res);
+        const productRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`products`);
+        const membersRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`members`);
+        this.gardens.push(res);
+        if(res.createdBy == USER.uid){
+
+          productRef.on('child_added', snapshot => {
+            this.products.push(snapshot.val());
+          })
+
         } else {
-          if (res.members && res.members.userkey == USER.uid) {
-            this.gardens.push(res);
-          }
+
+          membersRef.on('child_added', snapshot => {
+            if(snapshot.val() == USER.uid){
+              productRef.on('child_added', snapshot => {
+                this.products.push(snapshot.val());
+              })
+            }
+          })
         }
-      });
+      })
     });
   }
 
@@ -70,70 +80,17 @@ export class CreatePlantPage {
     correctOrientation: true
   }
 
-  takePhoto() {
-    this.camera.getPicture(this.options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      if (base64Image != null) {
-        this.currentImage = base64Image;
-
-        let USER = this.afAuth.auth.currentUser;
-
-        const pictures = storage().ref(`plants/${USER.uid}/${this.uuid.generateUUID()}`);
-        pictures.putString(base64Image, 'data_url').then(imagedata => {
-          this.plant.imageURL = imagedata.downloadURL;
-          this.imageUpload = true;
-        });
-
-      } else {
-        this.currentImage = 'assets/images/new-image.png';
-        this.plant.imageURL = this.currentImage;
-      }
-
-    })
-  }
-
-  getPlantsList() {
-    this.plants = [];
-    let USER = this.afAuth.auth.currentUser;
-
-    this.afDatabase.list(`gardens`).forEach(data => {
-      data.map(res => {
-        const productRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`plants`);
-        const membersRef = this.afDatabase.database.ref(`gardens/${res.$key}`).child(`members`);
-
-        if (res.createdBy == USER.uid) {
-
-          productRef.on('child_added', snapshot => {
-            this.updatePlant(snapshot.val(), snapshot.key);
-          })
-
-        } else {
-
-          membersRef.on('child_added', snapshot => {
-            if (snapshot.val() == USER.uid) {
-              productRef.on('child_added', snapshot => {
-                this.updatePlant(snapshot.val(), snapshot.key);
-              })
-            }
-          })
-        }
-      })
-    })
-  }
-
   updatePlant(data, key) {
     data.plantId = key;
     this.plants.push(data);
   }
 
   createPlant() {
-    this.plants.push(this.plant)
     if (!this.imageUpload) {
       this.plant.imageURL = this.currentImage;
     }
+
+    this.plant.stage = 'Cut';
 
     this.afAuth.authState.take(1).subscribe(auth => {
       this.plant.createdBy = auth.uid;
@@ -147,6 +104,7 @@ export class CreatePlantPage {
 
   showDetail(data: any) {
     // console.log(data)
+    this.plants = [];
     this.navCtrl.push(ViewPlantPage, { info: data });
   }
 

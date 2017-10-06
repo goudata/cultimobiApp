@@ -14,21 +14,10 @@
 
 
 <ion-content class="create-background">
-  <ion-toolbar no-border-top>
-    <div>
-      <ion-segment mode="md" [(ngModel)]="stageType">
-        <ion-segment-button value="add">
-          Add
-        </ion-segment-button>
-        <ion-segment-button value="list" (click)="getPlantsList()">
-          List
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-  </ion-toolbar>
-  <ion-card *ngIf="stageType =='add'">
 
-    <img (click)="takePhoto()" src="{{currentImage}}">
+  <!-- <ion-card>
+
+    <img (click)="takePhoto()" src="{{currentImage}}"> -->
 
     <!-- <ion-fab right top>
       <button ion-fab (click)="takePhoto()">
@@ -36,10 +25,10 @@
         </button>
     </ion-fab> -->
 
-  </ion-card>
+  <!-- </ion-card> -->
 
   <!-- Create -->
-  <ion-list *ngIf="stageType =='add'" padding>
+  <ion-list padding>
     <ion-item>
       <ion-label>Garden</ion-label>
       <ion-select [(ngModel)]="plant.gardenId" placeholder="Select Garden">
@@ -49,7 +38,7 @@
 
     <ion-item>
       <ion-label>Order Date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="plant.orderDate"></ion-datetime>
+      <ion-datetime [(ngModel)]="plant.orderDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -61,21 +50,14 @@
       </ion-select>
     </ion-item>
 
+    <!-- <ion-item>
+      <ion-label>Product</ion-label>
+      <ion-select [(ngModel)]="plant.productId" placeholder="Select Product">
+        <ion-option *ngFor="let product of products" value="{{product.productId}}">{{product.name}}</ion-option>
+      </ion-select>
+    </ion-item> -->
+
     <button ion-button full (click)="createPlant()">Add Plant</button>
   </ion-list>
-
-  <!-- Cutting -->
-  <ion-list *ngIf="stageType =='list'" padding>
-    <ion-item *ngFor="let plant of plants">
-      <ion-thumbnail item-start>
-        <img src="assets/images/011-leaf.png">
-      </ion-thumbnail>
-      <h4>{{plant.orderDate | date}}</h4>
-      <h3>{{plant.plantOrigin}}</h3>
-      <button ion-button clear item-end (click)="showDetail(plant)">View</button>
-      <button ion-button clear item-end (click)="cutPlant()">Cut</button>
-    </ion-item>
-  </ion-list>
-
 
 </ion-content>

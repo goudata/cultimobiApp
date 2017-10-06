@@ -34,6 +34,10 @@ import {CreateGardenPage} from "../pages/gardens/create-garden/create-garden";
 import {ViewGardenPage} from "../pages/gardens/view-garden/view-garden";
 import { AddToGardenPage } from '../pages/manage/add-to-garden/add-to-garden';
 import { ViewPlantPage } from '../pages/plants/view-plant/view-plant';
+import { CutPlantPage } from '../pages/plants/cut-plant/cut-plant';
+import { HarvestPlantPage } from '../pages/plants/harvest-plant/harvest-plant';
+import { DryPlantPage } from '../pages/plants/dry-plant/dry-plant';
+import { CurePlantPage } from '../pages/plants/cure-plant/cure-plant';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,11 @@ import { ViewPlantPage } from '../pages/plants/view-plant/view-plant';
     CreateGardenPage,
     ViewGardenPage,
     AddToGardenPage,
-    ViewPlantPage
+    ViewPlantPage,
+    CutPlantPage,
+    HarvestPlantPage,
+    DryPlantPage,
+    CurePlantPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +100,11 @@ import { ViewPlantPage } from '../pages/plants/view-plant/view-plant';
     CreateGardenPage,
     ViewGardenPage,
     AddToGardenPage,
-    ViewPlantPage
+    ViewPlantPage,
+    CutPlantPage,
+    HarvestPlantPage,
+    DryPlantPage,
+    CurePlantPage
   ],
   providers: [
     StatusBar,

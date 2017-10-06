@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>{{plant.productName}}</ion-title>
+    <ion-title>{{plant.batchNo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,9 +15,9 @@
 
 <ion-content class="view-background">
 
-  <ion-card>
+  <!-- <ion-card>
     <img (click)="takePhoto()" src="{{currentImage}}">
-  </ion-card>
+  </ion-card> -->
 
   <ion-list padding>
 
@@ -30,7 +30,7 @@
 
     <ion-item>
       <ion-label>Order Date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="plant.orderDate"></ion-datetime>
+      <ion-datetime [(ngModel)]="plant.orderDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -39,6 +39,13 @@
         <ion-option value="Seed">Seed</ion-option>
         <ion-option value="Clone">Clone</ion-option>
         <ion-option value="Tissue">Tissue</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Product</ion-label>
+      <ion-select [(ngModel)]="plant.productId" placeholder="Select Product">
+        <ion-option *ngFor="let product of products" value="{{product.productId}}">{{product.name}}</ion-option>
       </ion-select>
     </ion-item>
 

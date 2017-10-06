@@ -1,0 +1,77 @@
+<!--
+  Generated template for the DryPlantPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="leaf">
+    <ion-title>{{plant.batchNo}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="view-background">
+  <ion-list padding>
+
+    <ion-item>
+      <ion-label>Garden</ion-label>
+      <ion-select [(ngModel)]="plant.gardenId" placeholder="Select Garden" [disabled]="true">
+        <ion-option *ngFor="let garden of gardens" value="{{garden.$key}}">{{garden.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Order Date</ion-label>
+      <ion-datetime [(ngModel)]="plant.orderDate" [disabled]="true"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Batch No.</ion-label>
+      <ion-input [(ngModel)]="plant.batchNo" type="text" [disabled]="true"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Dry Weight</ion-label>
+      <ion-input [(ngModel)]="plant.dryWeight" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Flower</ion-label>
+      <ion-select [(ngModel)]="plant.productId" placeholder="Select Flower">
+        <ion-option *ngFor="let product of products" value="{{product.productId}}">{{product.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Trim Weight</ion-label>
+      <ion-input [(ngModel)]="plant.trimWeight" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Trim</ion-label>
+      <ion-select [(ngModel)]="plant.productTrimId" placeholder="Select Trim">
+        <ion-option *ngFor="let product of products" value="{{product.productId}}">{{product.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Waste Weight</ion-label>
+      <ion-input [(ngModel)]="plant.wasteWeight" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Waste</ion-label>
+      <ion-select [(ngModel)]="plant.productWasteId" placeholder="Select Waste">
+        <ion-option *ngFor="let product of products" value="{{product.productId}}">{{product.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button ion-button full (click)="updatePlantDry()">Process</button>
+
+  </ion-list>
+
+</ion-content>

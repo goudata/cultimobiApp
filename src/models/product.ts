@@ -10,6 +10,7 @@ export interface Product {
     members: object;
     gardenId: string;
     productId: string;
+    stock: any;
     createdBy: string;
     createdDate: any;
     updatedBy: string;
