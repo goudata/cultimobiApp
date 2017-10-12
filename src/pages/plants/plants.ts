@@ -48,6 +48,18 @@ export class PlantsPage {
     })
   }
 
+  removePlant(plant) {
+    
+        this.afAuth.authState.take(1).subscribe(auth => {
+          plant.updatedBy = auth.uid;
+          plant.updatedDate = Date.now();
+          plant.stage = 'Destroyed';
+          
+          this.afDatabase.object(`gardens/${plant.gardenId}/plants/${plant.plantId}`).set(plant)
+            .then(() => this.getPlantsList())
+        })
+      }
+
   stages(stage: any){
     switch (this.stageType) {
       case "Cut":
@@ -229,6 +241,28 @@ export class PlantsPage {
           text: 'Agree',
           handler: () => {
             this.updatePlant(data);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  destroy(data: any) {
+    let confirm = this.alertCtrl.create({
+      title: 'Destroy Plant',
+      message: 'Do you agree to destroy this plant?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.removePlant(data);
           }
         }
       ]

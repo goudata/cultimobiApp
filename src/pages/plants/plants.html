@@ -52,24 +52,72 @@
   </ion-toolbar>
 
   <ion-list>
-    <ion-item *ngFor="let plant of plants">
-      <ion-thumbnail item-start>
-        <img src="assets/images/011-leaf.png">
-      </ion-thumbnail>
-      <h4>{{plant.itemName}}</h4>
-      <h3 *ngIf="stageType !== 'Cut'">Batch #: {{plant.batchNo}}</h3>
-      <h3 *ngIf="stageType === 'All'">Current Stage: {{plant.stage}}</h3>
-      <p>ID: {{plant.plantId}}</p>
-      <p>Created: {{plant.createdDate | date}}</p>
-      <button *ngIf="stageType === 'All'" ion-button clear item-end (click)="showPlantDetail(plant)">View</button>
-      <button *ngIf="stageType === 'Cut'" ion-button clear item-end (click)="showPlantDetail_Cut(plant)">Cut</button>
-      <button *ngIf="stageType === 'Clone'" ion-button clear item-end (click)="developClone(plant)">Develop</button>
-      <button *ngIf="stageType === 'Vegetation'" ion-button clear item-end (click)="developVegetation(plant)">Develop</button>
-      <button *ngIf="stageType === 'Flower'" ion-button clear item-end (click)="developFlower(plant)">Develop</button>
-      <button *ngIf="stageType === 'Harvest'" ion-button clear item-end (click)="showPlantDetail_Harvest(plant)">Harvest</button>
-      <button *ngIf="stageType === 'Dry'" ion-button clear item-end (click)="showPlantDetail_Dry(plant)">Dry</button>
-      <button *ngIf="stageType === 'Cure'" ion-button clear item-end (click)="showPlantDetail_Cure(plant)">Cure</button>
-    </ion-item>
+    <ion-item-sliding *ngFor="let plant of plants">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/images/011-leaf.png">
+        </ion-avatar>
+        <h4>{{plant.itemName}}</h4>
+        <h3 *ngIf="stageType !== 'Cut'">Batch #: {{plant.batchNo}}</h3>
+        <h3>Current Stage: {{plant.stage}}</h3>
+        <p>ID: {{plant.plantId}}</p>
+        <p>Created: {{plant.createdDate | date}}</p>
+      </ion-item>
+      <ion-item-options *ngIf="stageType !== 'All'" side="right">
+        <!-- Cut -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Cut'" (click)="showPlantDetail_Cut(plant)">
+              <ion-icon name="md-cut"></ion-icon>
+              Cut
+            </button>
+
+        <!-- Clone -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Clone'" (click)="developClone(plant)">
+                <ion-icon name="md-color-fill"></ion-icon>
+                Develop
+              </button>
+
+        <!-- Vegetation -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Vegetation'" (click)="developVegetation(plant)">
+            <ion-icon name="ios-leaf"></ion-icon>
+            Develop
+          </button>
+
+        <!-- Flower -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Flower'" (click)="developFlower(plant)">
+            <ion-icon name="md-flower"></ion-icon>
+            Develop
+          </button>
+
+        <!-- Harvest -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Harvest'" (click)="showPlantDetail_Harvest(plant)">
+            <ion-icon name="ios-nuclear"></ion-icon>
+            Develop
+          </button>
+
+        <!-- Dry -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Dry'" (click)="showPlantDetail_Dry(plant)">
+            <ion-icon name="md-umbrella"></ion-icon>
+            Develop
+          </button>
+
+        <!-- Cure -->
+        <button ion-button color="secondary" icon-start *ngIf="stageType === 'Cure'" (click)="showPlantDetail_Cure(plant)">
+            <ion-icon name="ios-medkit"></ion-icon>
+            Develop
+          </button>
+
+        <button ion-button color="danger" icon-start *ngIf="stageType !== 'Developed' && stageType !== 'Destroyed'" (click)="destroy(plant)">
+              <ion-icon name="md-remove-circle"></ion-icon>
+              Destroy
+            </button>
+      </ion-item-options>
+      <ion-item-options side="left">
+        <button ion-button color="primary" icon-start (click)="showPlantDetail(plant)">
+              <ion-icon name="md-eye"></ion-icon>
+              View
+            </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <div *ngIf="!plants.length" text-center>
