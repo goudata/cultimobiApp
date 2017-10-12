@@ -18,6 +18,7 @@ import { CreateProductPage } from "../pages/products/create-product/create-produ
 import { TutorialPage } from "../pages/tutorial/tutorial";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { Camera } from "@ionic-native/camera";
+import { Geolocation } from '@ionic-native/geolocation';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { FIREBASE_CONFIG } from "./app.firebase.config";
@@ -111,6 +112,7 @@ import { CurePlantPage } from '../pages/plants/cure-plant/cure-plant';
     SplashScreen,
     BarcodeScanner,
     Camera,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

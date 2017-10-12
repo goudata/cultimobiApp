@@ -7,6 +7,7 @@ import { ProductsPage } from "../products";
 import { CameraOptions, Camera } from "@ionic-native/camera";
 import { storage } from "firebase";
 import { GenerateUUID } from '../../../utilities/generate-uuid';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the ViewProductPage page.
@@ -36,17 +37,39 @@ export class ViewProductPage {
   }
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private afAuth: AngularFireAuth,
-              private afDatabase: AngularFireDatabase,
-              private camera: Camera,
-              private uuid: GenerateUUID
-            ) {
+    public navParams: NavParams,
+    private geolocation: Geolocation,
+    private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase,
+    private camera: Camera,
+    private uuid: GenerateUUID
+  ) {
+
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      this.product.lati = resp.coords.latitude;
+      this.product.long = resp.coords.longitude;
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
 
     const detail = this.navParams.get('info')
     this.key = detail.$key;
     this.product = this.navParams.get('info');
     this.currentImage = this.product.imageURL;
+
+
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      debugger
+     // data can be a set of coordinates, or an error (if an error occurred).
+     if(this.product.lati == data.coords.latitude)
+      console.log('You are here')
+    });
+
   }
 
   types: any = {

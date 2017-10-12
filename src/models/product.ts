@@ -11,6 +11,8 @@ export interface Product {
     gardenId: string;
     productId: string;
     stock: any;
+    lati: any;
+    long: any;
     createdBy: string;
     createdDate: any;
     updatedBy: string;
